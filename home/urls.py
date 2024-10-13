@@ -1,6 +1,10 @@
 from django.urls import path
 from . import views
 from .views import TodoView
+from .views import TodoViewSet
+from rest_framework.routers import DefaultRouter
+router = DefaultRouter()
+router.register(r'todo-view-set',TodoViewSet, basename='todoviewset')
 
 urlpatterns = [
     path('',views.homepage,name="homepage"),
@@ -10,3 +14,6 @@ urlpatterns = [
 
     path('todo/',TodoView.as_view()),
 ]
+
+urlpatterns += router.urls
+

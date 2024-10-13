@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from .serializer import TodoSerializer
 from .models import Todo
 from rest_framework.views import APIView
+from rest_framework import viewsets
 
 # Create your views here.
 @api_view(['GET','POST','PATCH'])
@@ -119,7 +120,7 @@ class TodoView(APIView):
             'method-called':'You called a get method'
         })
     
-    
+
     def post(self,request):
         return Response({
             'status':True,
@@ -142,3 +143,8 @@ class TodoView(APIView):
             'msg':'This is a todo list',
             'method-called':'You called delete request'
         })
+    
+
+class TodoViewSet(viewsets.ModelViewSet):
+    serializer_class = TodoSerializer
+    queryset = Todo.objects.all()
